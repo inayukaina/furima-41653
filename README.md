@@ -37,7 +37,6 @@
 
 - belongs_to :user
 - has_one :order
-- belongs_to :genre
 
 
 ##  orders テーブル
@@ -69,4 +68,3 @@
 ### Association
 
 - belongs_to :order
-- belongs_to :genre
