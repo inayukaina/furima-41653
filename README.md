@@ -21,22 +21,23 @@
 
 ## items テーブル
 
-| Column                | Type       | Options                       |
-| --------------------- | ---------- | ----------------------------- |
-| name                  | string     | null: false                   |
-| description           | text       | null: false                   |
-| category              | integer    | null: false                   |
-| item_condition        | integer    | null: false                   |
-| shipping_cost_status  | integer    | null: false                   |
-| shipping_origin_area  | integer    | null: false                   |
-| shipping_schedule     | integer    | null: false                   |
-| price                 | integer    | null: false                   |
-| user                  | references | null: false, foreign_key:true |
+| Column                  | Type       | Options                       |
+| ----------------------- | ---------- | ----------------------------- |
+| name                    | string     | null: false                   |
+| description             | text       | null: false                   |
+| category_id             | integer    | null: false                   |
+| item_condition_id       | integer    | null: false                   |
+| shipping_cost_status_id | integer    | null: false                   |
+| prefecture_id           | integer    | null: false                   |
+| shipping_schedule_id    | integer    | null: false                   |
+| price                   | integer    | null: false                   |
+| user                    | references | null: false, foreign_key:true |
 
 ### Association
 
 - belongs_to :user
 - has_one :order
+- belongs_to :genre
 
 
 ##  orders テーブル
@@ -50,7 +51,7 @@
 
 - belongs_to :item
 - belongs_to :user
-- has_one :addresse
+- has_one :address
 
 
 ##  addresses テーブル
@@ -58,7 +59,7 @@
 | Column                | Type       | Options                       |
 | --------------------- | ---------- | ----------------------------- |
 | post_code             | string     | null: false                   |
-| prefecture            | string     | null: false                   |
+| prefecture_id         | integer    | null: false                   |
 | city                  | string     | null: false                   |
 | address               | string     | null: false                   |
 | building              | string     |                               |
@@ -68,3 +69,4 @@
 ### Association
 
 - belongs_to :order
+- belongs_to :genre
