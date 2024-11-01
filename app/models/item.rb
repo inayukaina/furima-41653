@@ -9,9 +9,12 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :shipping_schedule
 
+  validates :name, presence: true
+  validates :description, presence: true
   validates :category_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :item_condition_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :shipping_cost_status_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
   validates :shipping_schedule_id, numericality: { other_than: 1, message: "can't be blank" }
+  validates :price, presence: true
 end
