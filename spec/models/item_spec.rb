@@ -57,20 +57,25 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include "Price can't be blank"
       end
-      it 'priceが2桁以下では登録できない' do
-        @item.price = '99'
+      it 'priceが300円未満では登録できない' do
+        @item.price = '299'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is too short (minimum is 3 characters)')
+        expect(@item.errors.full_messages).to include('Price must be greater than or equal to 300')
       end
-      it 'priceが8桁以上では登録できない' do
+      it 'priceが10,000,000以上では登録できない' do
         @item.price = '10000000'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price is too long (maximum is 7 characters)')
+        expect(@item.errors.full_messages).to include('Price must be less than or equal to 9999999')
       end
       it 'priceが半角数字以外では登録できない' do
         @item.price = 'ああ'
         @item.valid?
-        expect(@item.errors.full_messages).to include('Price 半角数字を使用してください')
+        expect(@item.errors.full_messages).to include('Price is not a number')
+      end
+      it 'userが紐づいていなければ登録できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include 'User must exist'
       end
     end
   end
