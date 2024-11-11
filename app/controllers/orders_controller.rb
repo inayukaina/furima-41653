@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item, only: [:index, :create]
+  before_action :set_item
   before_action :redirect_if_own
+  before_action :redirect_if_soldout
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @order_address = OrderAddress.new
@@ -43,5 +44,11 @@ class OrdersController < ApplicationController
       card: order_params[:token],
       currency: 'jpy'
     )
+  end
+
+  def redirect_if_soldout
+    return unless @item.order.present?
+
+    redirect_to root_path
   end
 end
