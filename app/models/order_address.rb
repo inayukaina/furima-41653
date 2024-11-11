@@ -9,7 +9,7 @@ class OrderAddress
     validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
     validates :city
     validates :address
-    validates :phone_number, numericality: { only_integer: true }, length: { is: 11 }
+    validates :phone_number, format: { with: /\A\d{11}\z/, message: '半角数字(11桁)を使用してください' }
     validates :token
   end
   def save

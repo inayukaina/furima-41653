@@ -52,12 +52,17 @@ RSpec.describe OrderAddress, type: :model do
       it 'phone_numberが全角だと保存できないこと' do
         @order_address.phone_number = '０９０１２３４５６７８'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is not a number')
+        expect(@order_address.errors.full_messages).to include('Phone number 半角数字(11桁)を使用してください')
+      end
+      it 'phone_numberが数字でなければ保存できないこと' do
+        @order_address.phone_number = 'あああああああああああ'
+        @order_address.valid?
+        expect(@order_address.errors.full_messages).to include('Phone number 半角数字(11桁)を使用してください')
       end
       it 'phone_numberが11桁でなければ保存できないこと' do
         @order_address.phone_number = '090123456780'
         @order_address.valid?
-        expect(@order_address.errors.full_messages).to include('Phone number is the wrong length (should be 11 characters)')
+        expect(@order_address.errors.full_messages).to include('Phone number 半角数字(11桁)を使用してください')
       end
       it 'tokenが空だと保存できないこと' do
         @order_address.token = nil
