@@ -5,11 +5,11 @@ class OrderAddress
   with_options presence: true do
     validates :user_id
     validates :item_id
-    validates :post_code, format: { with: /\A\d{3}-\d{4}\z/, message: 'is invalid. Include hyphen(-)' }
-    validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
+    validates :post_code, format: { with: /\A\d{3}-\d{4}\z/, message: 'にはハイフン(-)を含めてください' }
+    validates :prefecture_id, numericality: { other_than: 1, message: 'は --- 以外を選択してください' }
     validates :city
     validates :address
-    validates :phone_number, format: { with: /\A\d{11}\z/, message: '半角数字(11桁)を使用してください' }
+    validates :phone_number, format: { with: /\A\d{11}\z/, message: 'は半角数字(11桁)を使用してください' }
     validates :token
   end
   def save
